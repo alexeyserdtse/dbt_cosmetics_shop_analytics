@@ -16,9 +16,12 @@ clean-targets:
 
 models:
   cosmetics_shop_analytics:
-    staging:
+    raw:
       +materialized: view
-    intermediate:
-      +materialized: ephemeral
-    marts:
+      +schema: raw
+    stg:
+      +materialized: view
+      +schema: stg
+    dwh:
       +materialized: table
+      +schema: dwh

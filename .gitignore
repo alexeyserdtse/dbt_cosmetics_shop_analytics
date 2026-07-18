@@ -226,5 +226,5 @@ data/
 *.duckdb.wal
 .user.yml
 
-# Claude Code local settings
-.claude/settings.local.json
+# Claude Code local settings (incl. transient tmp/lock files)
+.claude/
