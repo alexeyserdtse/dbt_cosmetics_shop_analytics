@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+jobs:
+  dbt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install dbt packages
+        run: dbt deps
+
+      # Raw data is local-only, so CI validates the project without building:
+      # parse catches broken refs, Jinja, and YAML.
+      - name: Validate project
+        run: dbt parse
+
+      - name: Lint SQL
+        run: |
+          if [ -n "$(find models -name '*.sql' -print -quit)" ]; then
+            sqlfluff lint models
+          else
+            echo "No SQL models yet — skipping lint"
+          fi
