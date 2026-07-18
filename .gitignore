@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# dbt / DuckDB
+target/
+dbt_packages/
+logs/
+data/
+*.duckdb
+*.duckdb.wal
+.user.yml
+
+# Claude Code local settings
+.claude/settings.local.json
