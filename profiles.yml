@@ -5,3 +5,7 @@ cosmetics_shop_analytics:
       type: duckdb
       path: dev.duckdb
       threads: 4
+      settings:
+        memory_limit: "8GB"
+        threads: 4
+        preserve_insertion_order: false
